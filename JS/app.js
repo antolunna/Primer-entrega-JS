@@ -1,33 +1,65 @@
-const confirmacion = confirm ("¿le gustaria recibir notificaciones?");
-if (confirmacion == true){
-    alert ("Recibiras nuestras ofertas diarias.");
-} else {
-    alert ("No recibiras ninguna notificacion.");
-}
-
-const productos =   [
-{nombre: "Vino", precio: 55000},
-{nombre:  "Fideos", precio: 1800},
-{nombre:  "Gaseosa", precio: 3000},
-{nombre: "Arroz", precio: 1500},
-{nombre: "Papas Fritas", precio: 2500}
-];
-
-
-const cantidadProductos = [0,1,2,3,4];
-for (let index = 0; index < cantidadProductos.length; index++){
-console.log (cantidadProductos[index]);
-}
-
-function aplicarDescuento(precio) {
-    if (precio > 2000) {
-        return precio * 0.9;
-    } else{
-        return precio;
+class AlimentoEnlatado {
+    constructor(id = [], nombre = [], precio = [], imagen = " ") {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = Number(precio);
+        this.imagen = imagen;
     }
 }
-console.log(aplicarDescuento(55000));
-console.log(aplicarDescuento(1800));
-console.log(aplicarDescuento(3000));
-console.log(aplicarDescuento(1500));
-console.log(aplicarDescuento(2500));
+class AlimentoFideos {
+    constructor(id = [], nombre = [], precio = [], imagen = " ") {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = Number(precio);
+        this.imagen = imagen;
+    }
+}
+class AlimentoHarinas {
+    constructor(id = [], nombre = [], precio = [], imagen = " ") {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = Number(precio);
+        this.imagen = imagen;
+    }
+}
+
+const lataAtun = new AlimentoEnlatado(1, "lata de atun", 2300, "./img/atun.png");
+const lataArvejas = new AlimentoEnlatado(2, "lata de arvejas", 1350, "./img/arvejas.webp");
+const lataDurazno = new AlimentoEnlatado(3, "lata de durazno", 1600, "./img/durazno.jpg");
+const paqueteMostachol = new AlimentoFideos(4, "fideos mostachol", 1050, "./img/mostachol.jpg");
+const paquetespaghetti = new AlimentoFideos(5, "fideos spaghetti", 1200, "./img/fideos.jpg");
+const paqueteTirabuzon = new AlimentoFideos(6, "fideos tirabuzon", 1100, "./img/tirabuzon.webp");
+const harinaRefinada = new AlimentoHarinas(7, "harina ultra refinada", 1050, "./img/refinada.jpg");
+const harinaLeudante = new AlimentoHarinas(8, "harina leudante", 1600, "./img/harina-leudante.jpg");
+const harinaCuatroCero = new AlimentoHarinas(9, "harina cuatro ceros", 1200, "./img/cuatrocero.jpg");
+
+const productosTotales = [lataAtun, lataArvejas, lataDurazno, paqueteMostachol, paquetespaghetti, paqueteTirabuzon, harinaRefinada, harinaLeudante, harinaCuatroCero];
+
+
+productosTotales.map((producto) => {
+    const div = document.getElementById("productosCarrito");
+    const divProductos = document.createElement("div")
+    divProductos.innerHTML = `
+    <div class="productos">
+    <img class="productosCarrito" src="${producto.imagen}" alt="${producto.nombre}" title="${producto.precio}">
+    <h5 class="productosCarrito"> ${producto.nombre}</h5>
+    <p class="productosCarrito">${producto.precio}</p>
+    <button id="botonClick" type="button" class="botonAgregarAlCarrito btn btn">Agregar al carrito</button>
+    </div>
+    `
+    div.appendChild(divProductos);
+});
+
+    localStorage.setItem("productosCarrito", JSON.stringify (productosCarrito));
+    productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+    if (productosCarrito.length > 0) {
+        imprimirCarritoEnHTML(productosCarrito);
+    }
+
+    const botonAgregarAlCarrito = document.getElementById("botonClick");
+    botonAgregarAlCarrito.addEventListener("click", () => {
+
+});
+
+
+
